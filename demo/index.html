@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Fancier Forms - dbucky</title>
+		<link href="normalize.css" rel="stylesheet" />
+		<link href="demo.css" rel="stylesheet" />
+	</head>
+	<body>
+		<main>
+			<h1>Fancier Forms</h1>
+			<form>
+				<div class="field">
+					<label for="firstName">First Name</label>
+					<input type="text" id="firstName" name="firstName" />
+				</div>
+				<div class="field">
+					<label for="contactMethod">Preferred Contact Method</label>
+					<select id="contactMethod" name="contactMethod">
+						<option value="">Select</option>
+						<option value="phone">Phone</option>
+						<option value="email">Email</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="lastName">Last Name</label>
+					<input type="text" id="lastName" name="lastName" />
+				</div>
+			</form>
+		</main>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="../jquery.fancierforms.js"></script>
+		<script src="demo.js"></script>
+		<script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&skin=desert"></script>
+	</body>
+</html>
