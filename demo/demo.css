@@ -1,7 +1,25 @@
+/*=======================================|
+    CONTENTS
+ |=======================================//
+
+    BASE STYLES
+    LAYOUT
+    HEADER
+    BODY
+*/
+
+/*=======================================|
+    LAYOUT
+ |=======================================*/
+
 main {
 	margin: 0 auto;
 	width: 50%;
 }
+
+/*=======================================|
+    FORMS
+ |=======================================*/
 
 .field {
 	margin: 1em 0;
@@ -10,6 +28,15 @@ main {
 label {
 	display: block;
 }
+
+/*.hidden {
+	position: absolute;
+	left: -999999px;
+}*/
+
+/*===================|
+	SELECTS
+ |===================*/
 
 .select {
 	background: #333;
@@ -26,7 +53,7 @@ label {
 }
 
 .select.focused {
-	border-color: #ffa200;
+	border-color: #38d778;
 }
 
 .select.open {
@@ -79,14 +106,59 @@ ul.options li:last-child {
 }
 
 ul.options li.selected {
-	background: #666;
+	background: #38d778;
+	color: #000;
 }
 
 ul.options li:hover {
-	background: #999;
+	background: #777;
+	color: #fff;
 }
 
-.hidden {
+/*===================|
+	RADIO BUTTONS
+ |===================*/
+
+input[type="radio"] + label {
+	display: inline-block;
+}
+
+.radio + label {
+	display: inline-block;
+}
+
+.radio {
+	background: #ededed;
+	border: 1px solid #333;
+	border-radius: 50%;
+	display: inline-block;
+	height: 10px;
+	position: relative;
+	width: 10px;
+}
+
+.radio.focused:before {
+	border: 1px solid #38d778;
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 12px;
+	left: 50%;
+	margin: -7px 0 0 -7px;
 	position: absolute;
-	left: -999999px;
+	top: 50%;
+	width: 12px;
+}
+
+.radio.selected:after {
+	background: #666;
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 6px;
+	left: 50%;
+	margin: -3px 0 0 -3px;
+	position: absolute;
+	top: 50%;
+	width: 6px;
 }
