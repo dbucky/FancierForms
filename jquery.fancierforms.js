@@ -8,7 +8,8 @@
 	    };
 	}
 
-	var keys = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, TAB: 9, SPACE: 32, ENTER: 13, ESC: 27 };
+	var keys = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, TAB: 9, SPACE: 32, ENTER: 13, ESC: 27 },
+		blurTimers = {};
 
     // global event handler and function for fancy selects
 	$(document).on("click", function (e) {
@@ -23,13 +24,17 @@
 
 	$.fn.extend({
 		fancifySelect: function(options) {
-	    	var plugin = "booyah",
-	    		fields = this.filter("select"),
-	    		defaults = {};
+	    	var defaults = {
+	    			// options go here
+		    		blurTimeout: 150
+		    	},
+		    	settings = $.extend(true, {}, defaults, options);
 
-		    function init() {
-		    	plugin.settings = $.extend(true, {}, defaults, options);
-		    }
+		    return this.filter("select").each(function () {
+	    		var _select = $(this);
+	    		_select.addClass("hidden").after(constructMarkup(_select));
+	    		bindEvents(_select);
+		    });
 
 		    function constructMarkup(_select) {
 	    		var markup = "<div class='fancy select'>",
@@ -57,13 +62,25 @@
 		    function bindNativeEvents(_select) {
 		    	_select.on("focus", function () {
 		    		//console.log("select#" + $(this).attr("id") + " is focused");
-		    		focus($(this));
+		    		var __select = $(this),
+		    			blurTimer = blurTimers[__select.attr("id")];
+
+		    		if (typeof blurTimer === "undefined") {
+		    			focus(__select);
+		    		}
+		    		else {
+		    			clearTimeout(blurTimer);
+		    		}
 		    	});
 
 		    	_select.on("blur", function () {
 		    		//console.log("select#" + $(this).attr("id") + " is blurred");
-		    		// set timeout
-		    		blur($(this));
+		    		var __select = $(this);
+		    		
+		    		blurTimers[__select.attr("id")] = setTimeout(function () {
+		    			delete blurTimers[__select.attr("id")];
+						blur(__select);
+		    		}, settings.blurTimeout);
 		    	});
 
 		    	_select.on("change", function () {
@@ -127,25 +144,20 @@
 		    function changeSelectedValue(_selectedOption) {
 		    	_selectedOption.parents(".fancy.select").prev("select").val(_selectedOption.attr("data-value")).trigger("change");
 		    }
-
-		    init();
-
-		    return fields.each(function () {
-	    		var _select = $(this);
-	    		_select.addClass("hidden").after(constructMarkup(_select));
-	    		bindEvents(_select);
-		    });
 	    },
 
 	    fancifyRadio: function(options) {
-	    	var plugin = {},
-	    		fields = this.filter("input:radio"),
-	    		defaults = {};
+	    	var defaults = {
+	    			// options go here
+	    			blurTimeout: 150
+	    		},
+	    		settings = $.extend(true, {}, defaults, options);
 
-		    function init() {
-		    	plugin.settings = $.extend(true, {}, defaults, options);
-		    	plugin.blurTimers = {};
-		    }
+		    return this.filter("input:radio").each(function () {
+	    		var _radio = $(this);
+	    		_radio.addClass("hidden").after(constructMarkup(_radio));
+		    	bindEvents(_radio);
+		    });
 
 		    function constructMarkup(_radio) {
 	    		return String.format("<div class='fancy radio' data-name='{0}' data-value='{1}'></div>", _radio.attr("name"), _radio.val());
@@ -159,7 +171,7 @@
 		    function bindNativeEvents(_radio) {
 		    	_radio.on("focus", function () {
 		    		var __radio = $(this),
-		    			blurTimer = plugin.blurTimers[__radio.attr("id")];
+		    			blurTimer = blurTimers[__radio.attr("id")];
 
 		    		if (typeof blurTimer === "undefined") {
 		    			focus(__radio);
@@ -172,10 +184,10 @@
 		    	_radio.on("blur", function () {
 		    		var __radio = $(this);
 		    		
-		    		plugin.blurTimers[__radio.attr("id")] = setTimeout(function () {
-		    			delete plugin.blurTimers[__radio.attr("id")];
+		    		blurTimers[__radio.attr("id")] = setTimeout(function () {
+		    			delete blurTimers[__radio.attr("id")];
 						blur(__radio);
-		    		}, 150);
+		    		}, settings.blurTimeout);
 		    	});
 
 		    	_radio.on("change", function () {
@@ -209,14 +221,6 @@
 		    	$("input:radio[name='" + group + "']").attr("checked", false);
 		    	$(String.format("input:radio[name='{0}'][value='{1}']", group, _fancyRadio.attr("data-value"))).trigger("change").get(0).checked = true;
 		    }
-
-		    init();
-
-		    return fields.each(function () {
-	    		var _radio = $(this);
-	    		_radio.addClass("hidden").after(constructMarkup(_radio));
-		    	bindEvents(_radio);
-		    });
 	    }
 	});
 })(jQuery, window, document);

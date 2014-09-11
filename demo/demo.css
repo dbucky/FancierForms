@@ -29,10 +29,10 @@ label {
 	display: block;
 }
 
-/*.hidden {
+.hidden {
 	position: absolute;
 	left: -999999px;
-}*/
+}
 
 /*===================|
 	SELECTS
@@ -95,6 +95,7 @@ ul.options {
 	padding: 0;
 	position: absolute;
 	width: 100%;
+	z-index: 1;
 }
 
 ul.options li {
