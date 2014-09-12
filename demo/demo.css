@@ -4,8 +4,10 @@
 
     BASE STYLES
     LAYOUT
-    HEADER
-    BODY
+    FORMS
+      SELECTS
+      RADIO BUTTONS
+      CHECKBOXES
 */
 
 /*=======================================|
@@ -183,7 +185,7 @@ input[type="checkbox"] + label {
 	border: 1px solid #333;
 	border-radius: 2px;
 	display: inline-block;
-	height: 15px;
+	height: 16px;
 	position: relative;
 	width: 16px;
 }
@@ -193,9 +195,9 @@ input[type="checkbox"] + label {
 	border-radius: 2px;
 	content: "";
 	display: block;
-	height: 17px;
+	height: 18px;
 	left: 50%;
-	margin: -9px 0 0 -10px;
+	margin: -10px 0 0 -10px;
 	position: absolute;
 	top: 50%;
 	width: 18px;
