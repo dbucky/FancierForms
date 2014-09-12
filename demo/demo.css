@@ -206,8 +206,11 @@ input[type="checkbox"] + label {
 	content: "\e800";
 	display: block;
 	font-family: fontello;
-	left: 50%;
-	margin: -7px 0 0 -8px;
+	height: 15px;
+	left: 0;
+	line-height: 15px;
 	position: absolute;
-	top: 50%;
+	text-align: center;
+	top: 2px;
+	width: 16px;
 }

@@ -12,17 +12,6 @@
 	var keys = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, TAB: 9, SPACE: 32, ENTER: 13, ESC: 27 },
 		blurTimers = {};
 
-    // global event handler and function for fancy selects
-	$(document).on("click", function (e) {
-		if ($(e.target).parents(".fancy.select").length === 0) {
-			closeAll();
-		}
-	});
-
-    function closeAll() {
-    	$(".fancy.select").removeClass("open").children(".options").hide();
-    }
-
 	$.fn.extend({
 		fancifySelect: function(options) {
 	    	var defaults = {
@@ -121,6 +110,7 @@
 		    }
 
 		    function blur(_select) {
+		    	closeAll();
 		    	_select.next(".fancy.select").removeClass("focused");
 		    }
 
@@ -140,6 +130,10 @@
 		    function close(_fancySelect) {
 		    	_fancySelect.removeClass("open").children(".options").hide();
 		    	_fancySelect.prev("select").trigger("focus");
+		    }
+
+		    function closeAll() {
+		    	$(".fancy.select").removeClass("open").children(".options").hide();
 		    }
 
 		    function changeSelectedValue(_selectedOption) {
