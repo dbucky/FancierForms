@@ -1,4 +1,5 @@
 ;(function($, window, document, undefined) {
+
 	if (!String.format) {
 	    String.format = function(format) {
 	        var args = Array.prototype.slice.call(arguments, 1);
@@ -216,11 +217,96 @@
 		    }
 
 		    function changeSelectedValue(_fancyRadio) {
-		    	var group = _fancyRadio.attr("data-name");
-		    	_fancyRadio.prev("input:radio").trigger("focus");
+		    	var group = _fancyRadio.attr("data-name"),
+		    		_radio = _fancyRadio.prev("input:radio");
+		    	_radio.trigger("focus");
 		    	$("input:radio[name='" + group + "']").attr("checked", false);
-		    	$(String.format("input:radio[name='{0}'][value='{1}']", group, _fancyRadio.attr("data-value"))).trigger("change").get(0).checked = true;
+		    	_radio.get(0).checked = true;
+		    	_radio.trigger("change");
+		    }
+	    },
+
+	    fancifyCheckbox: function(options) {
+	    	var defaults = {
+	    			// options go here
+	    			blurTimeout: 150
+	    		},
+	    		settings = $.extend(true, {}, defaults, options);
+
+		    return this.filter("input:checkbox").each(function () {
+	    		var _checkbox = $(this);
+	    		_checkbox.addClass("hidden").after(constructMarkup(_checkbox));
+		    	bindEvents(_checkbox);
+		    });
+
+		    function constructMarkup(_checkbox) {
+	    		return String.format("<div class='fancy checkbox' data-name='{0}' data-value='{1}'></div>", _checkbox.attr("name"), _checkbox.val());
+		    }
+
+		    function bindEvents(_checkbox) {
+		    	bindNativeEvents(_checkbox);
+		    	bindFancyEvents(_checkbox.next(".fancy.checkbox"));
+		    }
+
+		    function bindNativeEvents(_checkbox) {
+		    	_checkbox.on("focus", function () {
+		    		var __checkbox = $(this),
+		    			blurTimer = blurTimers[__checkbox.attr("id")];
+
+		    		if (typeof blurTimer === "undefined") {
+		    			focus(__checkbox);
+		    		}
+		    		else {
+		    			clearTimeout(blurTimer);
+		    		}
+		    	});
+
+		    	_checkbox.on("blur", function () {
+		    		var __checkbox = $(this);
+		    		
+		    		blurTimers[__checkbox.attr("id")] = setTimeout(function () {
+		    			delete blurTimers[__checkbox.attr("id")];
+						blur(__checkbox);
+		    		}, settings.blurTimeout);
+		    	});
+
+		    	_checkbox.on("change", function () {
+		    		syncChange($(this));
+		    	});
+		    }
+
+		    function bindFancyEvents(_fancyCheckbox) {
+		    	_fancyCheckbox.on("click", function () {
+		    		changeSelectedValue($(this));
+		    	});
+		    }
+
+		    function focus(_checkbox) {
+		    	_checkbox.next(".fancy.checkbox").addClass("focused");
+		    }
+
+		    function blur(_checkbox) {
+		    	_checkbox.next(".fancy.checkbox").removeClass("focused");
+		    }
+
+		    function syncChange(_checkbox) {
+		    	var _fancyCheckbox = _checkbox.next(".fancy.checkbox");
+		    	if (_checkbox.get(0).checked) {
+		    		_fancyCheckbox.addClass("selected");
+		    	}
+		    	else {
+		    		_fancyCheckbox.removeClass("selected");
+		    	}
+		    }
+
+		    function changeSelectedValue(_fancyCheckbox) {
+		    	var _checkbox = _fancyCheckbox.prev("input:checkbox"),
+		    		domElement = _checkbox.get(0);
+		    	_checkbox.trigger("focus");
+		    	domElement.checked = !domElement.checked;
+		    	_checkbox.trigger("change");
 		    }
 	    }
 	});
+
 })(jQuery, window, document);

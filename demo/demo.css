@@ -126,6 +126,7 @@ input[type="radio"] + label {
 
 .radio + label {
 	display: inline-block;
+	vertical-align: top;
 }
 
 .radio {
@@ -133,9 +134,9 @@ input[type="radio"] + label {
 	border: 1px solid #333;
 	border-radius: 50%;
 	display: inline-block;
-	height: 10px;
+	height: 16px;
 	position: relative;
-	width: 10px;
+	width: 16px;
 }
 
 .radio.focused:before {
@@ -143,12 +144,12 @@ input[type="radio"] + label {
 	border-radius: 50%;
 	content: "";
 	display: block;
-	height: 12px;
+	height: 18px;
 	left: 50%;
-	margin: -7px 0 0 -7px;
+	margin: -10px 0 0 -10px;
 	position: absolute;
 	top: 50%;
-	width: 12px;
+	width: 18px;
 }
 
 .radio.selected:after {
@@ -156,10 +157,57 @@ input[type="radio"] + label {
 	border-radius: 50%;
 	content: "";
 	display: block;
-	height: 6px;
+	height: 10px;
 	left: 50%;
-	margin: -3px 0 0 -3px;
+	margin: -5px 0 0 -5px;
 	position: absolute;
 	top: 50%;
-	width: 6px;
+	width: 10px;
+}
+
+/*===================|
+	CHECKBOXES
+ |===================*/
+
+input[type="checkbox"] + label {
+	display: inline-block;
+}
+
+.checkbox + label {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.checkbox {
+	background: #ededed;
+	border: 1px solid #333;
+	border-radius: 2px;
+	display: inline-block;
+	height: 15px;
+	position: relative;
+	width: 16px;
+}
+
+.checkbox.focused:before {
+	border: 1px solid #38d778;
+	border-radius: 2px;
+	content: "";
+	display: block;
+	height: 17px;
+	left: 50%;
+	margin: -9px 0 0 -10px;
+	position: absolute;
+	top: 50%;
+	width: 18px;
+}
+
+.checkbox.selected:after {
+	color: #666;
+	content: "\e800";
+	display: block;
+	font-family: fontello;
+	left: 50%;
+	margin: -7px 0 0 -8px;
+	position: absolute;
+	top: 50%;
 }

@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Fancier Forms - dbucky</title>
 		<link href="normalize.css" rel="stylesheet" />
+		<link href="fontello.css" rel="stylesheet" />
 		<link href="demo.css" rel="stylesheet" />
 	</head>
 	<body>
@@ -15,6 +16,10 @@
 					<input type="text" id="firstName" name="firstName" />
 				</div>
 				<div class="field">
+					<input type="checkbox" id="agree" name="agree" value="agree" />
+					<label for="agree">I agree to the Terms &amp; Conditions</label>
+				</div>
+				<div class="field">
 					<label for="contactMethod">Preferred Contact Method</label>
 					<select id="contactMethod" name="contactMethod">
 						<option value="">Select</option>
@@ -24,10 +29,17 @@
 				</div>
 				<div class="field">
 					<label>What's your favorite drink?</label>
-					<input type="radio" id="favoriteDrinkCoffee" name="favoriteDrink" value="coffee" /> <label for="favoriteDrinkCoffee">Coffee</label><br />
-					<input type="radio" id="favoriteDrinkTea" name="favoriteDrink" value="tea" /> <label for="favoriteDrinkTea">Tea</label><br />
-					<input type="radio" id="favoriteDrinkWater" name="favoriteDrink" value="water" /> <label for="favoriteDrinkWater">Water</label><br />
-					<input type="radio" id="favoriteDrinkJuice" name="favoriteDrink" value="juice" /> <label for="favoriteDrinkJuice">Juice</label>
+					<input type="radio" id="favoriteDrinkCoffee" name="favoriteDrink" value="coffee" />
+					<label for="favoriteDrinkCoffee">Coffee</label>
+					<br />
+					<input type="radio" id="favoriteDrinkTea" name="favoriteDrink" value="tea" />
+					<label for="favoriteDrinkTea">Tea</label>
+					<br />
+					<input type="radio" id="favoriteDrinkWater" name="favoriteDrink" value="water" />
+					<label for="favoriteDrinkWater">Water</label>
+					<br />
+					<input type="radio" id="favoriteDrinkJuice" name="favoriteDrink" value="juice" />
+					<label for="favoriteDrinkJuice">Juice</label>
 				</div>
 				<div class="field">
 					<label for="lastName">Last Name</label>
