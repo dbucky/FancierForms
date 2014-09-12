@@ -1,4 +1,93 @@
-FancierForms
+Fancier Forms
 ============
 
 Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.
+
+## Usage
+
+To use Fancier Forms, simply call one of the following functions on a jQuery object containing the appropriate form element(s).
+
+```
+$(function() {
+	$("select").fancifySelect();
+	$("input:radio").fancifyRadio();
+	$("input:checkbox").fancifyCheckbox();
+});
+```
+
+## Markup
+
+Fancier Forms works by adding minimal markup to the page after each matched element in the jQuery object. The markup for each of the three types of elements is shown below.
+
+### Select
+
+```
+<div class="fancy select">
+	<span class="selected-value">Select</span>
+	<ul class="options" style="display: none;">
+		<li class="selected">Select</li>
+		<li>Option 1</li>
+		<li>Option 2</li>
+		<li>Option 3</li>
+	</ul>
+</div>
+```
+
+### Radio Button
+
+```
+<div class="fancy radio"></div>
+```
+
+### Checkbox
+
+```
+<div class="fancy checkbox"></div>
+```
+
+## Styling
+
+No styling is done on your behalf by this plugin; the state of each fancy form element is tracked via classes. These classes allow you to style the fancy form elements in any way desired. Take a look at demo.css as a starting point.
+
+### Select
+
+Selects have a **focused** state and an **open** state.
+
+```
+<div class="fancy select focused open">
+	...
+</div>
+```
+
+### Radio Button, Checkbox
+
+Radio buttons and checkboxes have a **focused** state and a **selected** state.
+
+```
+<div class="fancy radio focused selected"></div>
+<div class="fancy checkbox focused selected"></div>
+```
+
+### Hidden
+
+What makes Fancier Forms elegant is that it binds the state of the fancy form element to the state of the underlying native form element. Thus, any changes that occur to the native element are automatically reflected in the fancy version. The way this occurs is that a **hidden** class is applied to the native element; the styling applied to this class should simply move the element offscreen so it is no longer visible but can still be interacted with.
+
+```
+/* recommended styling */
+.hidden {
+	position: absolute;
+	left: -999999px;
+}
+```
+
+This allows the plugin to let the native element handle the keyboard interactions. Since the native element is offscreen and obviously cannot be interacted with via the mouse, Fancy Forms steps in for those events on the fancy element. It does this by updating the state of the native element when the user makes a change to the fancy element, which is then reflected in the state of the fancy element due to the aforementioned binding.
+
+To see the native element and the fancy version working in tandem, just comment out the .hidden style rule in demo.css and view index.html.
+
+## License
+
+Fancier Forms is licensed under both the [MIT](http://opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
+
+## Credits
+
+The inspiration for this jQuery plugin was taken largely from Lutrasoft's similarly named [Fancyform](https://github.com/Lutrasoft/Fancyform) plugin, which is actually fancier in terms of features and capabilities, but offers no keyboard support. This plugin's goal was to remedy that situation, while staying true to the native form elements' functionality without all the bells and whistles.
