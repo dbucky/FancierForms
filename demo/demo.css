@@ -55,6 +55,10 @@ label {
 	vertical-align: top;
 }
 
+.select.disabled {
+	background: #ccc;
+}
+
 .select.focused {
 	border-color: #38d778;
 }
@@ -102,7 +106,8 @@ ul.options {
 	z-index: 1;
 }
 
-ul.options li {
+ul.options .group-label,
+ul.options .option {
 	font-size: 0.9em;
 }
 
@@ -134,10 +139,12 @@ ul.options .group .option {
 	padding-left: 1.4em;
 }
 
+ul.options .option.disabled,
 ul.options .group.disabled .option {
 	color: #666;
 }
 
+ul.options .option.disabled:hover,
 ul.options .group.disabled .option:hover {
 	background: inherit;
 }
@@ -163,6 +170,10 @@ input[type="radio"] + label {
 	height: 16px;
 	position: relative;
 	width: 16px;
+}
+
+.radio.disabled {
+	border-color: #ccc;
 }
 
 .radio.focused:before {
@@ -191,6 +202,10 @@ input[type="radio"] + label {
 	width: 10px;
 }
 
+.radio.disabled.selected:after {
+	background: #999;
+}
+
 /*===================|
 	CHECKBOXES
  |===================*/
@@ -208,10 +223,16 @@ input[type="checkbox"] + label {
 	background: #ededed;
 	border: 1px solid #333;
 	border-radius: 2px;
+	color: #666;
 	display: inline-block;
 	height: 16px;
 	position: relative;
 	width: 16px;
+}
+
+.checkbox.disabled {
+	border-color: #ccc;
+	color: #999;
 }
 
 .checkbox.focused:before {
@@ -228,7 +249,6 @@ input[type="checkbox"] + label {
 }
 
 .checkbox.selected:after {
-	color: #666;
 	content: "\e800";
 	display: block;
 	font-family: fontello;

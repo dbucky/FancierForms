@@ -38,25 +38,25 @@
 		    });
 
 		    function constructMarkup(_select) {
-	    		var markup = "<div class='fancy select'>",
+	    		var markup = String.format("<div class='fancy select{0}'>", _select.prop("disabled") ? " disabled" : ""),
 	    			selectValue = _select.val(),
-	    			_selectedOption = _select.children("[value='" + selectValue + "']");
+	    			_selectedOption = _select.find("[value='" + selectValue + "']");
 
 	    		markup += String.format("<span class='selected-value' data-value='{0}'>{1}</span><ul class='options' style='display: none;'>", _selectedOption.val(), _selectedOption.text());
 
 	    		_select.children().each(function () {
 	    			switch (this.tagName.toLowerCase()) {
 	    				case "option":
-	    					markup += constructOptionMarkup($(this));
+	    					markup += constructOptionMarkup($(this), selectValue);
 	    					break;
 	    				case "optgroup":
 	    					var _group = $(this),
 	    						groupLabel = _group.attr("label");
 
-	    					markup += String.format("<li class='group{1}'><span class='group-label'>{0}</span><ul>", !groupLabel ? "&nbsp;" : groupLabel, _group.is(":disabled") ? " disabled" : "");
+	    					markup += String.format("<li class='group{1}'><span class='group-label'>{0}</span><ul>", !groupLabel ? "&nbsp;" : groupLabel, _group.prop("disabled") ? " disabled" : "");
 
     						_group.children().each(function () {
-	    						markup += constructOptionMarkup($(this));
+	    						markup += constructOptionMarkup($(this), selectValue);
     						});
 
 	    					markup += "</ul></li>"
@@ -70,7 +70,7 @@
 
 		    function constructOptionMarkup(_option, selectValue) {
 		    	var optionValue = _option.val();
-				return String.format("<li class='option{2}' data-value='{0}'>{1}</li>", optionValue, _option.text(), optionValue === selectValue ? " selected" : "");
+				return String.format("<li class='option{2}{3}' data-value='{0}'>{1}</li>", optionValue, _option.text(), optionValue === selectValue ? " selected" : "", _option.prop("disabled") ? " disabled": "");
 		    }
 
 		    function bindEvents(_select) {
@@ -113,24 +113,29 @@
 
 		    function bindFancyEvents(_fancySelect) {
 		    	_fancySelect.on("click", function () {
-		    		$(this).prev("select").trigger("focus");
+		    		var __fancySelect = $(this);
+		    		if (!__fancySelect.hasClass("disabled")) {
+			    		__fancySelect.prev("select").trigger("focus");
+			    	}
 		    	});
 
 		    	_fancySelect.on("click", ".selected-value", function () {
 		    		var __fancySelect = $(this).parent();
 
-		    		if (__fancySelect.hasClass("open")) {
-		    			close(__fancySelect);
-		    		}
-		    		else {
-		    			open(__fancySelect);
-		    		}
+		    		if (!__fancySelect.hasClass("disabled")) {
+			    		if (__fancySelect.hasClass("open")) {
+			    			close(__fancySelect);
+			    		}
+			    		else {
+			    			open(__fancySelect);
+			    		}
+			    	}
 		    	});
 
 		    	_fancySelect.on("click", ".option", function () {
 		    		_selectedOption = $(this);
 
-		    		if (_selectedOption.parents(".group.disabled").length === 0) {
+		    		if (!_selectedOption.hasClass("disabled") && _selectedOption.parents(".group.disabled").length === 0) {
 		    			changeSelectedValue(_selectedOption);
 		    			close(_selectedOption.parents(".fancy.select"));	
 		    		}
@@ -180,7 +185,7 @@
 		    });
 
 		    function constructMarkup(_radio) {
-	    		return String.format("<div class='fancy radio' data-name='{0}' data-value='{1}'></div>", _radio.attr("name"), _radio.val());
+	    		return String.format("<div class='fancy radio{2}' data-name='{0}' data-value='{1}'></div>", _radio.attr("name"), _radio.val(), _radio.prop("disabled") ? " disabled" : "");
 		    }
 
 		    function bindEvents(_radio) {
@@ -217,7 +222,10 @@
 
 		    function bindFancyEvents(_fancyRadio) {
 		    	_fancyRadio.on("click", function () {
-		    		changeSelectedValue($(this));
+		    		var __fancyRadio = $(this);
+		    		if (!__fancyRadio.hasClass("disabled")) {
+			    		changeSelectedValue(__fancyRadio);
+			    	}
 		    	});
 		    }
 
@@ -258,7 +266,7 @@
 		    });
 
 		    function constructMarkup(_checkbox) {
-	    		return String.format("<div class='fancy checkbox' data-name='{0}' data-value='{1}'></div>", _checkbox.attr("name"), _checkbox.val());
+	    		return String.format("<div class='fancy checkbox{2}' data-name='{0}' data-value='{1}'></div>", _checkbox.attr("name"), _checkbox.val(), _checkbox.prop("disabled") ? " disabled" : "");
 		    }
 
 		    function bindEvents(_checkbox) {
@@ -295,7 +303,10 @@
 
 		    function bindFancyEvents(_fancyCheckbox) {
 		    	_fancyCheckbox.on("click", function () {
-		    		changeSelectedValue($(this));
+		    		var __fancyCheckbox = $(this);
+		    		if (!__fancyCheckbox.hasClass("disabled")) {
+		    			changeSelectedValue(__fancyCheckbox);
+		    		}
 		    	});
 		    }
 

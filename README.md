@@ -43,19 +43,11 @@ Fancier Forms works by adding minimal markup to the page after each matched elem
 	<ul class="options" style="display: none;">
 		<li class="option selected">Select</li>
 		<li class="group">
-			<span class="group-label">Enabled Group</span>
+			<span class="group-label">Group</span>
 			<ul>
-				<li class="option">Enabled Group, Option 1</li>
-				<li class="option">Enabled Group, Option 2</li>
-				<li class="option">Enabled Group, Option 3</li>
-			</ul>
-		</li>
-		<li class="group disabled">
-			<span class="group-label">Disabled Group</span>
-			<ul>
-				<li class="option">Disabled Group, Option 1</li>
-				<li class="option">Disabled Group, Option 2</li>
-				<li class="option">Disabled Group, Option 3</li>
+				<li class="option">Group Option 1</li>
+				<li class="option">Group Option 2</li>
+				<li class="option">Group Option 3</li>
 			</ul>
 		</li>
 	</ul>
@@ -88,7 +80,7 @@ Selects have a **focused** state and an **open** state.
 </div>
 ```
 
-Additionally, the Options can have a **selected** state.
+Additionally, Options have a **selected** state.
 
 ```
 ...
@@ -103,6 +95,27 @@ Radio buttons and checkboxes have a **focused** state and a **selected** state.
 ```
 <div class="fancy radio focused selected"></div>
 <div class="fancy checkbox focused selected"></div>
+```
+
+### Disabled
+
+Fancier Forms supports disabled form elements. Adding the disabled attribute to Selects (as well as Optgroups and Options), Radio Buttons, and Checkboxes will cause a **disabled** class to be added to the corresponding fancy version. This only occurs when the fancy element is created, so dynamically removing and re-adding this attribute to the native elements will not update the fancy ones. I may try to implement dynamic support in the future. In the meantime, simply keep the disabled class on the fancy element in sync with the disabled attribute on the native version.
+
+```
+<div class="fancy select disabled">
+	...
+	<ul class="options">
+		<li class="option disabled">Option 1</li>
+		<li class="group disabled">
+			<ul>
+				<li class="option">Option 2</li>
+				<li class="option">Option 3</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="fancy radio disabled"></div>
+<div class="fancy checkbox disabled"></div>
 ```
 
 ### Hidden

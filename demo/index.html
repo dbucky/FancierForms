@@ -16,12 +16,12 @@
 					<input type="text" id="firstName" name="firstName" />
 				</div>
 				<div class="field">
-					<input type="checkbox" id="agree" name="agree" value="agree" />
-					<label for="agree">I agree to the Terms &amp; Conditions</label>
+					<input type="checkbox" id="pizza" name="pizza" value="pizza" />
+					<label for="pizza">I like pizza!</label>
 				</div>
 				<div class="field">
 					<label for="contactMethod">Preferred Contact Method</label>
-					<select id="contactMethod" name="contactMethod">
+					<select id="contactMethod" name="contactMethod" disabled>
 						<option value="">Select</option>
 						<option value="phone">Phone</option>
 						<option value="email">Email</option>
@@ -35,7 +35,7 @@
 					<input type="radio" id="favoriteDrinkTea" name="favoriteDrink" value="tea" />
 					<label for="favoriteDrinkTea">Tea</label>
 					<br />
-					<input type="radio" id="favoriteDrinkWater" name="favoriteDrink" value="water" />
+					<input type="radio" disabled id="favoriteDrinkWater" name="favoriteDrink" value="water" />
 					<label for="favoriteDrinkWater">Water</label>
 					<br />
 					<input type="radio" id="favoriteDrinkJuice" name="favoriteDrink" value="juice" />
@@ -44,6 +44,10 @@
 				<div class="field">
 					<label for="lastName">Last Name</label>
 					<input type="text" id="lastName" name="lastName" />
+				</div>
+				<div class="field">
+					<input type="checkbox" disabled id="agree" name="agree" value="agree" />
+					<label for="agree">I agree to the Terms &amp; Conditions</label>
 				</div>
 				<div class="field">
 					<label>Do you like salad?</label>
@@ -67,7 +71,7 @@
 						</optgroup>
 						<optgroup label="Vegetables">
 							<option value="peas">Peas</option>
-							<option value="carrots">Carrots</option>
+							<option value="carrots" disabled>Carrots</option>
 							<option value="cucumbers">Cucumbers</option>
 							<option value="zucchini">Zucchini</option>
 							<option value="squash">Squash</option>
