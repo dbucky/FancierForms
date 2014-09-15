@@ -143,3 +143,5 @@ Fancier Forms is licensed under both the [MIT](http://opensource.org/licenses/mi
 The inspiration for this jQuery plugin was taken largely from Lutrasoft's similarly named [Fancyform](https://github.com/Lutrasoft/Fancyform) plugin, which is actually fancier in terms of features and capabilities, but offers no keyboard support. This plugin's goal was to remedy that situation, while staying true to the native form elements' functionality without all the bells and whistles.
 
 [Refresh-SF](http://gpbmike.github.io/refresh-sf/) used for JavaScript minification.
+
+The version numbers for each release of this plugin adhere to [Semantic Versioning](http://semver.org/spec/v2.0.0.html). 
