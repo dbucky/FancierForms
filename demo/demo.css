@@ -52,6 +52,7 @@ label {
 	outline: none;
 	padding: 0;
 	position: relative;
+	vertical-align: top;
 }
 
 .select.focused {
@@ -63,7 +64,8 @@ label {
 }
 
 .selected-value,
-ul.options li {
+ul.options .option,
+ul.options .group-label {
 	display: block;
 	padding: 0.3em 0.7em;
 }
@@ -104,18 +106,40 @@ ul.options li {
 	font-size: 0.9em;
 }
 
-ul.options li:last-child {
+ul.options > .option:last-child,
+ul.options .group .option:last-child {
 	border-radius: 0 0 4px 4px;
 }
 
-ul.options li.selected {
+ul.options .option.selected {
 	background: #38d778;
 	color: #000;
 }
 
-ul.options li:hover {
+ul.options .option:hover {
 	background: #777;
 	color: #fff;
+}
+
+ul.options .group-label {
+	background: #444;
+	color: #999;
+}
+
+ul.options .group > ul {
+	padding: 0;
+}
+
+ul.options .group .option {
+	padding-left: 1.4em;
+}
+
+ul.options .group.disabled .option {
+	color: #666;
+}
+
+ul.options .group.disabled .option:hover {
+	background: inherit;
 }
 
 /*===================|

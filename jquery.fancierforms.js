@@ -1,5 +1,8 @@
 ;(function($, window, document, undefined) {
 
+	var keys = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, TAB: 9, SPACE: 32, ENTER: 13, ESC: 27 },
+		blurTimers = {};
+
 	if (!String.format) {
 	    String.format = function(format) {
 	        var args = Array.prototype.slice.call(arguments, 1);
@@ -9,20 +12,28 @@
 	    };
 	}
 
-	var keys = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, TAB: 9, SPACE: 32, ENTER: 13, ESC: 27 },
-		blurTimers = {};
+    function closeAll() {
+    	$(".fancy.select").removeClass("open").children(".options").hide();
+    }
+
+	$(document).on("click", function (e) {
+		if ($(e.target).parents(".fancy.select").length === 0) {
+			closeAll();
+		}
+	});
 
 	$.fn.extend({
 		fancifySelect: function(options) {
 	    	var defaults = {
-	    			// options go here
 		    		blurTimeout: 150
 		    	},
 		    	settings = $.extend(true, {}, defaults, options);
 
 		    return this.filter("select").each(function () {
 	    		var _select = $(this);
-	    		_select.addClass("hidden").after(constructMarkup(_select));
+	    		// size attribute added to make Firefox play nice with onchange event
+	    		// https://bugzilla.mozilla.org/show_bug.cgi?id=126379#c43
+	    		_select.addClass("hidden").after(constructMarkup(_select)).attr("size", _select.find("option").size());
 	    		bindEvents(_select);
 		    });
 
@@ -34,14 +45,32 @@
 	    		markup += String.format("<span class='selected-value' data-value='{0}'>{1}</span><ul class='options' style='display: none;'>", _selectedOption.val(), _selectedOption.text());
 
 	    		_select.children().each(function () {
-	    			var _option = $(this),
-	    				optionValue = _option.val();
+	    			switch (this.tagName.toLowerCase()) {
+	    				case "option":
+	    					markup += constructOptionMarkup($(this));
+	    					break;
+	    				case "optgroup":
+	    					var _group = $(this),
+	    						groupLabel = _group.attr("label");
 
-	    			markup += String.format("<li{2} data-value='{0}'>{1}</li>", _option.val(), _option.text(), optionValue === selectValue ? " class='selected'" : "");
+	    					markup += String.format("<li class='group{1}'><span class='group-label'>{0}</span><ul>", !groupLabel ? "&nbsp;" : groupLabel, _group.is(":disabled") ? " disabled" : "");
+
+    						_group.children().each(function () {
+	    						markup += constructOptionMarkup($(this));
+    						});
+
+	    					markup += "</ul></li>"
+	    					break;
+	    			}
 	    		});
 
 	    		markup += "</ul></div>";
 	    		return markup;
+		    }
+
+		    function constructOptionMarkup(_option, selectValue) {
+		    	var optionValue = _option.val();
+				return String.format("<li class='option{2}' data-value='{0}'>{1}</li>", optionValue, _option.text(), optionValue === selectValue ? " selected" : "");
 		    }
 
 		    function bindEvents(_select) {
@@ -51,7 +80,6 @@
 
 		    function bindNativeEvents(_select) {
 		    	_select.on("focus", function () {
-		    		//console.log("select#" + $(this).attr("id") + " is focused");
 		    		var __select = $(this),
 		    			blurTimer = blurTimers[__select.attr("id")];
 
@@ -64,7 +92,6 @@
 		    	});
 
 		    	_select.on("blur", function () {
-		    		//console.log("select#" + $(this).attr("id") + " is blurred");
 		    		var __select = $(this);
 		    		
 		    		blurTimers[__select.attr("id")] = setTimeout(function () {
@@ -74,20 +101,22 @@
 		    	});
 
 		    	_select.on("change", function () {
-		    		//console.log("select#" + $(this).attr("id") + " is changed");
 		    		syncChange($(this));
 		    	});
 
 		    	_select.on("keydown", function (e) {
-		    		if (e.which === keys.ESC) {
-		    			closeAll();
+		    		if (e.which === keys.ESC || e.which === keys.ENTER) {
+		    			close($(this).next(".fancy.select"));
 		    		}
 		    	});
 		    }
 
 		    function bindFancyEvents(_fancySelect) {
+		    	_fancySelect.on("click", function () {
+		    		$(this).prev("select").trigger("focus");
+		    	});
+
 		    	_fancySelect.on("click", ".selected-value", function () {
-		    		//console.log("fancy#" + $(this).parent().prev().attr("id") + " clicked");
 		    		var __fancySelect = $(this).parent();
 
 		    		if (__fancySelect.hasClass("open")) {
@@ -98,10 +127,13 @@
 		    		}
 		    	});
 
-		    	_fancySelect.on("click", "li", function () {
+		    	_fancySelect.on("click", ".option", function () {
 		    		_selectedOption = $(this);
-		    		changeSelectedValue(_selectedOption);
-		    		close(_selectedOption.parents(".fancy.select"));
+
+		    		if (_selectedOption.parents(".group.disabled").length === 0) {
+		    			changeSelectedValue(_selectedOption);
+		    			close(_selectedOption.parents(".fancy.select"));	
+		    		}
 		    	});
 		    }
 
@@ -110,30 +142,24 @@
 		    }
 
 		    function blur(_select) {
-		    	closeAll();
-		    	_select.next(".fancy.select").removeClass("focused");
+		    	var _fancySelect = _select.next(".fancy.select");
+		    	close(_fancySelect);
+		    	_fancySelect.removeClass("focused");
 		    }
 
 		    function syncChange(_select) {
 		    	var selectValue = _select.val(),
-	    			_selectedOption = _select.children("[value='" + selectValue + "']");
+	    			_selectedOption = _select.find("option[value='" + selectValue + "']");
 
-	    		_select.next(".fancy.select").children(".selected-value").text(_selectedOption.text()).attr("data-value", selectValue).next(".options").children().removeClass("selected").filter("[data-value='" + selectValue + "']").addClass("selected");
+	    		_select.next(".fancy.select").children(".selected-value").text(_selectedOption.text()).attr("data-value", selectValue).next(".options").find(".option").removeClass("selected").filter("[data-value='" + selectValue + "']").addClass("selected");
 		    }
 
 		    function open(_fancySelect) {
-		    	closeAll();
 	    		_fancySelect.addClass("open").children(".options").show();
-	    		_fancySelect.prev("select").trigger("focus");
 		    }
 
 		    function close(_fancySelect) {
 		    	_fancySelect.removeClass("open").children(".options").hide();
-		    	_fancySelect.prev("select").trigger("focus");
-		    }
-
-		    function closeAll() {
-		    	$(".fancy.select").removeClass("open").children(".options").hide();
 		    }
 
 		    function changeSelectedValue(_selectedOption) {
@@ -143,7 +169,6 @@
 
 	    fancifyRadio: function(options) {
 	    	var defaults = {
-	    			// options go here
 	    			blurTimeout: 150
 	    		},
 	    		settings = $.extend(true, {}, defaults, options);
@@ -222,7 +247,6 @@
 
 	    fancifyCheckbox: function(options) {
 	    	var defaults = {
-	    			// options go here
 	    			blurTimeout: 150
 	    		},
 	    		settings = $.extend(true, {}, defaults, options);

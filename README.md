@@ -21,14 +21,43 @@ Fancier Forms works by adding minimal markup to the page after each matched elem
 
 ### Select
 
+#### Simple example
+
+```
+<div class="fancy select">
+    <span class="selected-value">Select</span>
+    <ul class="options" style="display: none;">
+        <li class="option selected">Select</li>
+        <li class="option">Option 1</li>
+        <li class="option">Option 2</li>
+        <li class="option">Option 3</li>
+    </ul>
+</div>
+```
+
+#### Optgroup example
+
 ```
 <div class="fancy select">
 	<span class="selected-value">Select</span>
 	<ul class="options" style="display: none;">
-		<li class="selected">Select</li>
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
+		<li class="option selected">Select</li>
+		<li class="group">
+			<span class="group-label">Enabled Group</span>
+			<ul>
+				<li class="option">Enabled Group, Option 1</li>
+				<li class="option">Enabled Group, Option 2</li>
+				<li class="option">Enabled Group, Option 3</li>
+			</ul>
+		</li>
+		<li class="group disabled">
+			<span class="group-label">Disabled Group</span>
+			<ul>
+				<li class="option">Disabled Group, Option 1</li>
+				<li class="option">Disabled Group, Option 2</li>
+				<li class="option">Disabled Group, Option 3</li>
+			</ul>
+		</li>
 	</ul>
 </div>
 ```
@@ -57,6 +86,14 @@ Selects have a **focused** state and an **open** state.
 <div class="fancy select focused open">
 	...
 </div>
+```
+
+Additionally, the Options can have a **selected** state.
+
+```
+...
+	<li class="option selected">Option 3</li>
+...
 ```
 
 ### Radio Button, Checkbox

@@ -51,16 +51,29 @@
 					<input type="radio" id="likeSaladNo" name="likeSalad" value="no" /> <label for="likeSaladNo">No</label><br />
 				</div>
 				<div class="field">
-					<label for="vegetable">Pick a vegetable</label>
-					<select id="vegetable" name="vegetable">
+					<label for="fruitOrVegetable">Pick a fruit or vegetable</label>
+					<select id="fruitOrVegetable" name="fruitOrVegetable">
 						<option value="">Select</option>
-						<option value="peas">Peas</option>
-						<option value="carrots">Carrots</option>
-						<option value="cucumbers">Cucumbers</option>
-						<option value="zucchini">Zucchini</option>
-						<option value="squash">Squash</option>
-						<option value="eggplant">Eggplant</option>
-						<option value="green-beans">Green Beans</option>
+						<optgroup label="Fruits" disabled>
+							<option value="bananas">Bananas</option>
+							<option value="apples">Apples</option>
+							<option value="pears">Pears</option>
+							<option value="peaches">Peaches</option>
+							<option value="watermelon">Watermelon</option>
+							<option value="blueberries">Blueberries</option>
+							<option value="cherries">Cherries</option>
+							<option value="strawberries">Strawberries</option>
+							<option value="grapes">Grapes</option>
+						</optgroup>
+						<optgroup label="Vegetables">
+							<option value="peas">Peas</option>
+							<option value="carrots">Carrots</option>
+							<option value="cucumbers">Cucumbers</option>
+							<option value="zucchini">Zucchini</option>
+							<option value="squash">Squash</option>
+							<option value="eggplant">Eggplant</option>
+							<option value="green-beans">Green Beans</option>
+						</optgroup>
 					</select>
 				</div>
 			</form>
