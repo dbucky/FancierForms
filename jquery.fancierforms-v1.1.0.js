@@ -9,8 +9,7 @@
 		}
 	});
 
-	var keys = { ENTER: 13, ESC: 27 },
-		formatString = function (string) {
+	var formatString = function (string) {
 	        var args = Array.prototype.slice.call(arguments, 1);
 	        return string.replace(/{(\d+)}/g, function (match, number) {
 	            return args[number] !== undefined ? args[number] : match;
@@ -186,7 +185,8 @@
 			var _this = this;
 
 			_this.el.on("keydown", function (e) {
-				if (e.which === keys.ESC || e.which === keys.ENTER) {
+				// ENTER = 13, ESC = 27
+				if (e.which === 13 || e.which === 27) {
 					_this.close();
 				}
 			});
