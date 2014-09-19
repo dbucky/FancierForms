@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Fancier Forms : Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Fancier Forms</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dbucky/FancierForms">View on GitHub</a>
+
+          <h1 id="project_title">Fancier Forms</h1>
+          <h2 id="project_tagline">Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dbucky/FancierForms/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dbucky/FancierForms/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To use Fancier Forms, simply call one of the following functions on a jQuery object containing the appropriate form element(s).</p>
+
+<pre><code>$(function() {
+    $("select").fancifySelect();
+    $("input:radio").fancifyRadio();
+    $("input:checkbox").fancifyCheckbox();
+});
+</code></pre>
+
+<h2>
+<a name="markup" class="anchor" href="#markup"><span class="octicon octicon-link"></span></a>Markup</h2>
+
+<p>Fancier Forms works by adding minimal markup to the page after each matched element in the jQuery object. The markup for each of the three types of elements is shown below.</p>
+
+<h3>
+<a name="select" class="anchor" href="#select"><span class="octicon octicon-link"></span></a>Select</h3>
+
+<h4>
+<a name="simple-example" class="anchor" href="#simple-example"><span class="octicon octicon-link"></span></a>Simple example</h4>
+
+<pre><code>&lt;div class="fancy select"&gt;
+    &lt;span class="selected-value"&gt;Select&lt;/span&gt;
+    &lt;ul class="options" style="display: none;"&gt;
+        &lt;li class="option selected"&gt;Select&lt;/li&gt;
+        &lt;li class="option"&gt;Option 1&lt;/li&gt;
+        &lt;li class="option"&gt;Option 2&lt;/li&gt;
+        &lt;li class="option"&gt;Option 3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4>
+<a name="optgroup-example" class="anchor" href="#optgroup-example"><span class="octicon octicon-link"></span></a>Optgroup example</h4>
+
+<pre><code>&lt;div class="fancy select"&gt;
+    &lt;span class="selected-value"&gt;Select&lt;/span&gt;
+    &lt;ul class="options" style="display: none;"&gt;
+        &lt;li class="option selected"&gt;Select&lt;/li&gt;
+        &lt;li class="group"&gt;
+            &lt;span class="group-label"&gt;Group&lt;/span&gt;
+            &lt;ul&gt;
+                &lt;li class="option"&gt;Group Option 1&lt;/li&gt;
+                &lt;li class="option"&gt;Group Option 2&lt;/li&gt;
+                &lt;li class="option"&gt;Group Option 3&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="radio-button" class="anchor" href="#radio-button"><span class="octicon octicon-link"></span></a>Radio Button</h3>
+
+<pre><code>&lt;div class="fancy radio"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="checkbox" class="anchor" href="#checkbox"><span class="octicon octicon-link"></span></a>Checkbox</h3>
+
+<pre><code>&lt;div class="fancy checkbox"&gt;&lt;/div&gt;
+</code></pre>
+
+<h2>
+<a name="styling" class="anchor" href="#styling"><span class="octicon octicon-link"></span></a>Styling</h2>
+
+<p>No styling is done on your behalf by this plugin; the state of each fancy form element is tracked via classes. These classes allow you to style the fancy form elements in any way desired. Take a look at demo.css as a starting point.</p>
+
+<h3>
+<a name="select-1" class="anchor" href="#select-1"><span class="octicon octicon-link"></span></a>Select</h3>
+
+<p>Selects have a <strong>focused</strong> state and an <strong>open</strong> state.</p>
+
+<pre><code>&lt;div class="fancy select focused open"&gt;
+    ...
+&lt;/div&gt;
+</code></pre>
+
+<p>Additionally, Options have a <strong>selected</strong> state.</p>
+
+<pre><code>...
+    &lt;li class="option selected"&gt;Option 3&lt;/li&gt;
+...
+</code></pre>
+
+<h3>
+<a name="radio-button-checkbox" class="anchor" href="#radio-button-checkbox"><span class="octicon octicon-link"></span></a>Radio Button, Checkbox</h3>
+
+<p>Radio buttons and checkboxes have a <strong>focused</strong> state and a <strong>selected</strong> state.</p>
+
+<pre><code>&lt;div class="fancy radio focused selected"&gt;&lt;/div&gt;
+&lt;div class="fancy checkbox focused selected"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="disabled" class="anchor" href="#disabled"><span class="octicon octicon-link"></span></a>Disabled</h3>
+
+<p>Fancier Forms supports disabled form elements. Adding the disabled attribute to Selects (as well as Optgroups and Options), Radio Buttons, and Checkboxes will cause a <strong>disabled</strong> class to be added to the corresponding fancy version. This only occurs when the fancy element is created, so dynamically removing and re-adding this attribute to the native elements will not update the fancy ones. I may try to implement dynamic support in the future. In the meantime, simply keep the disabled class on the fancy element in sync with the disabled attribute on the native version.</p>
+
+<pre><code>&lt;div class="fancy select disabled"&gt;
+    ...
+    &lt;ul class="options"&gt;
+        &lt;li class="option disabled"&gt;Option 1&lt;/li&gt;
+        &lt;li class="group disabled"&gt;
+            &lt;ul&gt;
+                &lt;li class="option"&gt;Option 2&lt;/li&gt;
+                &lt;li class="option"&gt;Option 3&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="fancy radio disabled"&gt;&lt;/div&gt;
+&lt;div class="fancy checkbox disabled"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="hidden" class="anchor" href="#hidden"><span class="octicon octicon-link"></span></a>Hidden</h3>
+
+<p>What makes Fancier Forms elegant is that it binds the state of the fancy form element to the state of the underlying native form element. Thus, any changes that occur to the native element are automatically reflected in the fancy version. The way this occurs is that a <strong>hidden</strong> class is applied to the native element; the styling applied to this class should simply move the element offscreen so it is no longer visible but can still be interacted with.</p>
+
+<pre><code>/* recommended styling */
+.hidden {
+    position: absolute;
+    left: -999999px;
+}
+</code></pre>
+
+<p>This allows the plugin to let the native element handle the keyboard interactions. Since the native element is offscreen and obviously cannot be interacted with via the mouse, Fancy Forms steps in for those events on the fancy element. It does this by updating the state of the native element when the user makes a change to the fancy element, which is then reflected in the state of the fancy element due to the aforementioned binding.</p>
+
+<p>To see the native element and the fancy version working in tandem, just comment out the .hidden style rule in demo.css and view index.html.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Fancier Forms is licensed under both the <a href="http://opensource.org/licenses/mit-license.php">MIT</a> and <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> licenses.</p>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p>The inspiration for this jQuery plugin was taken largely from Lutrasoft's similarly named <a href="https://github.com/Lutrasoft/Fancyform">Fancyform</a> plugin, which is actually fancier in terms of features and capabilities, but offers no keyboard support. This plugin's goal was to remedy that situation, while staying true to the native form elements' functionality without all the bells and whistles.</p>
+
+<p><a href="http://gpbmike.github.io/refresh-sf/">Refresh-SF</a> used for JavaScript minification.</p>
+
+<p>The version numbers for each release of this plugin adhere to <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Fancier Forms maintained by <a href="https://github.com/dbucky">dbucky</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
