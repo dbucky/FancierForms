@@ -1,5 +1,5 @@
 $(function() {
-	$("select").fancifySelect();
-	$("input:radio").fancifyRadio();
 	$("input:checkbox").fancifyCheckbox();
+	$("input:radio").fancifyRadio();
+	$("select").fancifySelect();
 });

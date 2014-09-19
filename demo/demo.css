@@ -68,8 +68,8 @@ label {
 }
 
 .selected-value,
-ul.options .option,
-ul.options .group-label {
+.options .option,
+.options .group-label {
 	display: block;
 	padding: 0.3em 0.7em;
 }
@@ -95,9 +95,10 @@ ul.options .group-label {
 	margin-top: -3px;
 }
 
-ul.options {
+.options {
 	background: #333;
 	border-radius: 0 0 4px 4px;
+	display: none;
 	left: 0;
 	margin: 0;
 	padding: 0;
@@ -106,46 +107,50 @@ ul.options {
 	z-index: 1;
 }
 
-ul.options .group-label,
-ul.options .option {
+.select.open .options {
+	display: block;
+}
+
+.options .group-label,
+.options .option {
 	font-size: 0.9em;
 }
 
-ul.options > .option:last-child,
-ul.options .group .option:last-child {
+.options > .option:last-child,
+.options .group .option:last-child {
 	border-radius: 0 0 4px 4px;
 }
 
-ul.options .option.selected {
+.options .option.selected {
 	background: #38d778;
 	color: #000;
 }
 
-ul.options .option:hover {
+.options .option:hover {
 	background: #777;
 	color: #fff;
 }
 
-ul.options .group-label {
+.options .group-label {
 	background: #444;
 	color: #999;
 }
 
-ul.options .group > ul {
+.options .group > ul {
 	padding: 0;
 }
 
-ul.options .group .option {
+.options .group .option {
 	padding-left: 1.4em;
 }
 
-ul.options .option.disabled,
-ul.options .group.disabled .option {
+.options .option.disabled,
+.options .group.disabled .option {
 	color: #666;
 }
 
-ul.options .option.disabled:hover,
-ul.options .group.disabled .option:hover {
+.options .option.disabled:hover,
+.options .group.disabled .option:hover {
 	background: inherit;
 }
 
