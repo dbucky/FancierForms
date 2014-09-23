@@ -269,6 +269,51 @@ Full-Width Styles
   margin: 0 auto;
 }
 
+nav {
+  background: #595959;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  color: #fff;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+nav li {
+  float: left;
+  position: relative;
+}
+
+nav li + li {
+  border-left: 2px solid #373737;
+}
+
+nav li:first-child a {
+  border-bottom-left-radius: 2px;
+}
+
+nav li:last-child a {
+  border-bottom-right-radius: 2px;
+}
+
+nav a {
+  color: inherit;
+  display: block;
+  font-weight: 700;
+  padding: 10px;
+}
+
+nav a.active {
+  background: #0090ff;
+}
+
 #forkme_banner {
   display: block;
   position: absolute;

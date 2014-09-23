@@ -1,0 +1,293 @@
+/*=======================================|
+    CONTENTS
+ |=======================================//
+
+    BASE STYLES
+    LAYOUT
+    FORMS
+      SELECTS
+      RADIO BUTTONS
+      CHECKBOXES
+*/
+
+/*=======================================|
+    LAYOUT
+ |=======================================*/
+
+main {
+	margin: 0 auto;
+	width: 50%;
+}
+
+form {
+	padding: 0;
+}
+
+/*=======================================|
+    FORMS
+ |=======================================*/
+
+.field {
+	border-radius: 2px;
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	margin: 10px 0 15px;
+	padding: 10px;
+	width: 100%;
+}
+
+.field-wrapper {
+	margin: 0 3px;
+	padding: 3px;
+	width: 100%;
+}
+
+label {
+	display: block;
+}
+
+input[type="text"] {
+	border: 1px solid #333;
+	border-radius: 3px;
+	margin: 0;
+	outline: none;
+	padding: 8px 10px;
+	width: 200px;
+}
+
+input[type="text"]:focus {
+	border-color: #0090ff;
+}
+
+input[type="text"],
+.select {
+	font-family: Arial;
+	font-size: 13px;
+	line-height: normal;
+}
+
+.hidden {
+	position: absolute;
+	left: -999999px;
+}
+
+/*===================|
+	SELECTS
+ |===================*/
+
+.select {
+	background: #333;
+	border: 1px solid #333;
+	border-radius: 3px;
+	color: #fff;
+	cursor: default;
+	display: inline-block;
+	margin: 0;
+	min-width: 200px;
+	outline: none;
+	padding: 0;
+	position: relative;
+	vertical-align: top;
+}
+
+.select.disabled {
+	background: #ccc;
+	border-color: #ccc;
+}
+
+.select.focused {
+	border-color: #0090ff;
+}
+
+.select.open {
+	border-radius: 3px 3px 0 0;
+}
+
+.selected-value,
+.options .option,
+.options .group-label {
+	display: block;
+	padding: 8px 10px;
+}
+
+.selected-value:after {
+	border: 5px solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	content: "";
+	display: block;
+	height: 0;
+	margin-top: -2px;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	width: 0;
+}
+
+.select.open .selected-value:after {
+	border-bottom: 5px solid;
+	border-top: none;
+	margin-top: -3px;
+}
+
+.options {
+	background: #333;
+	border-radius: 0 0 4px 4px;
+	display: none;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+
+.select.open .options {
+	display: block;
+}
+
+.options .group-label,
+.options .option {
+	font-size: 0.9em;
+}
+
+.options > .option:last-child,
+.options .group .option:last-child {
+	border-radius: 0 0 4px 4px;
+}
+
+.options .option.selected {
+	background: #0090ff;
+	color: #000;
+}
+
+.options .option:hover {
+	background: #777;
+	color: #fff;
+}
+
+.options .group-label {
+	background: #444;
+	color: #999;
+}
+
+.options .group > ul {
+	padding: 0;
+}
+
+.options .group .option {
+	padding-left: 1.4em;
+}
+
+.options .option.disabled,
+.options .group.disabled .option {
+	color: #666;
+}
+
+.options .option.disabled:hover,
+.options .group.disabled .option:hover {
+	background: inherit;
+}
+
+.select ul {
+	list-style: none;
+	margin: 0;
+}
+
+.select li {
+	display: block;
+}
+
+/*===================|
+	RADIO BUTTONS
+ |===================*/
+
+input[type="radio"] + label {
+	display: inline-block;
+}
+
+.radio + label {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.radio {
+	background: #fff;
+	border: 1px solid #333;
+	border-radius: 50%;
+	display: inline-block;
+	height: 18px;
+	position: relative;
+	width: 18px;
+}
+
+.radio.disabled {
+	border-color: #ccc;
+}
+
+.radio.focused {
+	border-color: #0090ff;
+}
+
+.radio.selected:after {
+	background: #666;
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 10px;
+	left: 50%;
+	margin: -5px 0 0 -5px;
+	position: absolute;
+	top: 50%;
+	width: 10px;
+}
+
+.radio.disabled.selected:after {
+	background: #999;
+}
+
+/*===================|
+	CHECKBOXES
+ |===================*/
+
+input[type="checkbox"] + label {
+	display: inline-block;
+}
+
+.checkbox + label {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.checkbox {
+	background: #fff;
+	border: 1px solid #333;
+	border-radius: 3px;
+	color: #666;
+	display: inline-block;
+	height: 18px;
+	position: relative;
+	width: 18px;
+}
+
+.checkbox.disabled {
+	border-color: #ccc;
+	color: #999;
+}
+
+.checkbox.focused {
+	border-color: #0090ff;
+}
+
+.checkbox.selected:after {
+	background: #666;
+	border-radius: 1px;
+	content: "";
+	display: block;
+	height: 10px;
+	left: 50%;
+	margin: -5px 0 0 -5px;
+	position: absolute;
+	top: 50%;
+	width: 10px;
+}

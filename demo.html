@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta name="description" content="Fancier Forms : Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.">
+        <link rel="stylesheet" media="screen" href="stylesheets/stylesheet.css">
+        <link href="stylesheets/fontello.css" rel="stylesheet" />
+        <link href="stylesheets/demo.css" rel="stylesheet" />
+        <title>Fancier Forms</title>
+    </head>
+    <body>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+	            <nav>
+		            <ul>
+		                <li><a href="index.html">Home</a></li>
+		                <li><a class="active" href="demo.html">Demo</a></li>
+		                <li><a href="deep-dive.html">Deep Dive</a></li>
+		            </ul>
+		        </nav>
+                <a id="forkme_banner" href="https://github.com/dbucky/FancierForms">View on GitHub</a>
+                <h1 id="project_title">Fancier Forms</h1>
+                <h2 id="project_tagline">Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.</h2>
+                <section id="downloads">
+                    <a class="zip_download_link" href="https://github.com/dbucky/FancierForms/zipball/master">Download this project as a .zip file</a>
+                    <a class="tar_download_link" href="https://github.com/dbucky/FancierForms/tarball/master">Download this project as a tar.gz file</a>
+                </section>
+            </header>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+            	<h2>Demo</h2>
+                <form>
+                    <h3>Checkbox Example</h3>
+                    <p>This</p>
+<pre><code>&lt;input type="checkbox" id="pizza" name="pizza" value="pizza" /&gt;
+&lt;label for="pizza"&gt;I like pizza!&lt;/label&gt;</code></pre>
+					<p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <input type="checkbox" id="pizza" name="pizza" value="pizza" />
+	                        <label for="pizza">I like pizza!</label>
+                        </div>
+                    </div>
+                    <h3>Radio Button Example</h3>
+                    <p>This</p>
+<pre><code>&lt;label&gt;Do you like salad?&lt;/label&gt;
+&lt;input type="radio" id="likeSaladYes" name="likeSalad" value="yes" /&gt;
+&lt;label for="likeSaladYes"&gt;Yes&lt;/label&gt;
+&lt;br /&gt;
+&lt;input type="radio" id="likeSaladNo" name="likeSalad" value="no" /&gt;
+&lt;label for="likeSaladNo"&gt;No&lt;/label&gt;</code></pre>
+					<p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <label>Do you like salad?</label>
+	                        <input type="radio" id="likeSaladYes" name="likeSalad" value="yes" /> <label for="likeSaladYes">Yes</label><br />
+	                        <input type="radio" id="likeSaladNo" name="likeSalad" value="no" /> <label for="likeSaladNo">No</label>
+                        </div>
+                    </div>
+                    <h3>Select Example</h3>
+                    <p>This</p>
+<pre><code>&lt;label for="fruitOrVegetable"&gt;Pick a fruit or vegetable&lt;/label&gt;
+&lt;select id="fruitOrVegetable" name="fruitOrVegetable"&gt;
+    &lt;option value=""&gt;Select&lt;/option&gt;
+    &lt;optgroup label="Fruits" disabled&gt;
+        &lt;option value="bananas"&gt;Bananas&lt;/option&gt;
+        &lt;option value="apples"&gt;Apples&lt;/option&gt;
+        &lt;option value="blueberries"&gt;Blueberries&lt;/option&gt;
+        &lt;option value="strawberries"&gt;Strawberries&lt;/option&gt;
+        &lt;option value="grapes"&gt;Grapes&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Vegetables"&gt;
+        &lt;option value="peas"&gt;Peas&lt;/option&gt;
+        &lt;option value="carrots" disabled&gt;Carrots&lt;/option&gt;
+        &lt;option value="cucumbers"&gt;Cucumbers&lt;/option&gt;
+        &lt;option value="zucchini"&gt;Zucchini&lt;/option&gt;
+        &lt;option value="green-beans"&gt;Green Beans&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+					<p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <label for="fruitOrVegetable">Pick a fruit or vegetable</label>
+	                        <select id="fruitOrVegetable" name="fruitOrVegetable">
+	                            <option value="">Select</option>
+	                            <optgroup label="Fruits" disabled>
+	                                <option value="bananas">Bananas</option>
+	                                <option value="apples">Apples</option>
+	                                <option value="blueberries">Blueberries</option>
+	                                <option value="strawberries">Strawberries</option>
+	                                <option value="grapes">Grapes</option>
+	                            </optgroup>
+	                            <optgroup label="Vegetables">
+	                                <option value="peas">Peas</option>
+	                                <option value="carrots" disabled>Carrots</option>
+	                                <option value="cucumbers">Cucumbers</option>
+	                                <option value="zucchini">Zucchini</option>
+	                                <option value="green-beans">Green Beans</option>
+	                            </optgroup>
+	                        </select>
+                        </div>
+                    </div>
+                    <h3>Disabled Checkbox Example</h3>
+                    <p>This</p>
+<pre><code>&lt;input type="checkbox" disabled id="agree" name="agree" value="agree" /&gt;
+&lt;label for="agree"&gt;I agree to the Terms &amp;amp; Conditions&lt;/label&gt;</code></pre>
+                    <p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <input type="checkbox" disabled id="agree" name="agree" value="agree" />
+	                        <label for="agree">I agree to the Terms &amp; Conditions</label>
+                        </div>
+                    </div>
+                    <h3>Disabled Radio Button Example</h3>
+                    <p>This</p>
+<pre><code>&lt;label&gt;What's your favorite drink?&lt;/label&gt;
+&lt;input type="radio" id="drinkCoffee" name="drink" value="coffee" /&gt;
+&lt;label for="drinkCoffee"&gt;Coffee&lt;/label&gt;
+&lt;br /&gt;
+&lt;input type="radio" id="drinkTea" name="drink" value="tea" /&gt;
+&lt;label for="drinkTea"&gt;Tea&lt;/label&gt;
+&lt;br /&gt;
+&lt;input type="radio" disabled id="drinkWater" name="drink" value="water" /&gt;
+&lt;label for="drinkWater"&gt;Water&lt;/label&gt;
+&lt;br /&gt;
+&lt;input type="radio" id="drinkJuice" name="drink" value="juice" /&gt;
+&lt;label for="drinkJuice"&gt;Juice&lt;/label&gt;</code></pre>
+                    <p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <label>What's your favorite drink?</label>
+	                        <input type="radio" id="drinkCoffee" name="drink" value="coffee" />
+	                        <label for="drinkCoffee">Coffee</label>
+	                        <br />
+	                        <input type="radio" id="drinkTea" name="drink" value="tea" />
+	                        <label for="drinkTea">Tea</label>
+	                        <br />
+	                        <input type="radio" disabled id="drinkWater" name="drink" value="water" />
+	                        <label for="drinkWater">Water</label>
+	                        <br />
+	                        <input type="radio" id="drinkJuice" name="drink" value="juice" />
+	                        <label for="drinkJuice">Juice</label>
+                        </div>
+                    </div>
+                    <h3>Disabled Select Example</h3>
+                    <p>This</p>
+<pre><code>&lt;label for="contactMethod"&gt;Preferred Contact Method&lt;/label&gt;
+&lt;select id="contactMethod" name="contactMethod" disabled&gt;
+    &lt;option value=""&gt;Select&lt;/option&gt;
+    &lt;option value="phone"&gt;Phone&lt;/option&gt;
+    &lt;option value="email"&gt;Email&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                    <p>becomes</p>
+                    <div class="field">
+                    	<div class="field-wrapper">
+	                        <label for="contactMethod">Preferred Contact Method</label>
+	                        <select id="contactMethod" name="contactMethod" disabled>
+	                            <option value="">Select</option>
+	                            <option value="phone">Phone</option>
+	                            <option value="email">Email</option>
+	                        </select>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <!-- FOOTER  -->
+        <div id="footer_wrap" class="outer">
+            <footer class="inner">
+                <p class="copyright">Fancier Forms maintained by <a href="https://github.com/dbucky">dbucky</a></p>
+                <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+            </footer>
+        </div>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="javascripts/jquery.fancierforms-v1.1.0.js"></script>
+        <script src="javascripts/demo.js"></script>
+    </body>
+</html>
