@@ -65,10 +65,10 @@ input[type="text"],
 	line-height: normal;
 }
 
-.hidden {
+/*.hidden {
 	position: absolute;
 	left: -999999px;
-}
+}*/
 
 /*===================|
 	SELECTS
