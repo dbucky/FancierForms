@@ -3,9 +3,24 @@
 	$.extend({
 		// inspired by http://oli.me.uk/2013/06/01/prototypical-inheritance-done-right/
 		inherit: function (derived, base, derivedExtrasAndOverrides) {
-			derived.prototype = Object.create(base.prototype);
+			derived.prototype = new base();
 	    	derived.prototype.constructor = derived;
 	    	$.extend(derived.prototype, derivedExtrasAndOverrides);
+		},
+		fancyOverrides: function (overrides) {
+			for (var type in overrides) {
+				switch (type) {
+					case "FancyCheckbox":
+						$.extend(FancyCheckbox.prototype, overrides[type]);
+						break;
+					case "FancyRadio":
+						$.extend(FancyRadio.prototype, overrides[type]);
+						break;
+					case "FancySelect":
+						$.extend(FancySelect.prototype, overrides[type]);
+						break;
+				}
+			}
 		}
 	});
 
@@ -17,7 +32,6 @@
 		},
 		FancyBase = function (element) {
 			this.el = element;
-			this.isFocused = false;
 		},
 		FancyCheckbox = function (element) {
 			FancyBase.call(this, element);
@@ -110,10 +124,12 @@
 		},
 		changeValue: function () {
 			var _this = this;
-			_this.el.trigger("focus");
-			_this.getGroup().attr("checked", false);
-			_this.el.get(0).checked = true;
-			_this.el.trigger("change");
+			if (!_this.isDisabled()) {
+				_this.el.trigger("focus");
+				_this.getGroup().attr("checked", false);
+				_this.el.get(0).checked = true;
+				_this.el.trigger("change");
+			}
 		}
 	});
 	$.inherit(FancySelect, FancyBase, {
@@ -230,6 +246,16 @@
 	    		(new FancySelect($(this))).init();
 		    });
 	    }
+	});
+
+	function closeAll() {
+    	$(".fancy.select").removeClass("open");
+    }
+
+	$(document).on("click", function (e) {
+		if ($(e.target).parents(".fancy.select").length === 0) {
+			closeAll();
+		}
 	});
 
 })(jQuery, Object, Array);
