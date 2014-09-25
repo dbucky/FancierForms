@@ -1,7 +1,7 @@
 Fancier Forms
 ============
 
-Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions.
+Completely styleable, jQuery-driven form element replacements (select, radio, checkbox) that work cooperatively with their native counterparts to mimic the expected user experience for both mouse and keyboard interactions. Check out the [live demo](http://dbucky.github.io/FancierForms/demo.html) and [deep dive documentation](http://dbucky.github.io/FancierForms/deep-dive.html) on my [GitHub Pages site](http://dbucky.github.io/FancierForms/).
 
 ## Usage
 
