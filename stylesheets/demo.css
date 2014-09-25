@@ -229,7 +229,7 @@ input[type="radio"] + label {
 	border-color: #0090ff;
 }
 
-.radio.selected:after {
+.radio.checked:after {
 	background: #666;
 	border-radius: 50%;
 	content: "";
@@ -242,7 +242,7 @@ input[type="radio"] + label {
 	width: 10px;
 }
 
-.radio.disabled.selected:after {
+.radio.disabled.checked:after {
 	background: #999;
 }
 
@@ -279,7 +279,7 @@ input[type="checkbox"] + label {
 	border-color: #0090ff;
 }
 
-.checkbox.selected:after {
+.checkbox.checked:after {
 	background: #666;
 	border-radius: 1px;
 	content: "";

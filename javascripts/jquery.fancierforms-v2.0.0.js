@@ -55,9 +55,9 @@
 		},
 		fancify: function () {
 			var _this = this;
-			_this.fel = $($.parseHTML(formatString("<div class='fancy {0}{1}{2}'></div>", _this.type, _this.isDisabled() ? " disabled" : "", _this.isSelected() ? " selected" : "")));
+			_this.fel = $($.parseHTML(formatString("<div class='fancy {0}{1}{2}'></div>", _this.type, _this.isDisabled() ? " disabled" : "", _this.isChecked() ? " checked" : "")));
 		},
-		isSelected: function () {
+		isChecked: function () {
 			return this.el.is(":checked");
 		},
 		isDisabled: function () {
@@ -71,7 +71,7 @@
 		},
 		syncChange: function () {
 			var _this = this;
-	    	_this.isSelected() ? _this.fel.addClass("selected") : _this.fel.removeClass("selected");
+	    	_this.isChecked() ? _this.fel.addClass("checked") : _this.fel.removeClass("checked");
 	    },
 	    changeValue: function () {
 	    	var _this = this;
@@ -119,8 +119,8 @@
 			return $(formatString("input:radio[name='{0}']", this.el.attr("name")));
 		},
 		syncChange: function () {
-			this.getGroup().next().removeClass("selected");
-			this.fel.addClass("selected");
+			this.getGroup().next().removeClass("checked");
+			this.fel.addClass("checked");
 		},
 		changeValue: function () {
 			var _this = this;
