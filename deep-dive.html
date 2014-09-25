@@ -32,7 +32,86 @@
         <div id="main_content_wrap" class="outer">
             <section id="main_content" class="inner">
             	<h2>Deep Dive</h2>
-                <p>Fancier Forms is completely extensible/overridable.</p>
+                <p>Fancier Forms is completely extensible/overridable. This is because v1.1.0 of the plugin was written using the Prototype design pattern, with those qualities in mind.</p>
+                <h3>The Prototype Pattern</h3>
+                <p>While writing v1.0.0 of this plugin, I noticed that the three form elements this plugin supports&mdash;selects, radios, and checkboxes&mdash;share a lot of functionality in common, especially radios and checkboxes. Coming from a background in object oriented programming, this translates into an abstract base class with multiple derived classes inheriting from it. After some research and experimentation, I found that the Prototype pattern is a great candidate for achieving this functionality in JavaScript.</p>
+                <p>Here's the base class I created that represents the core functionality provided by Fancier Forms:</p>
+<pre><code>// constructor
+var FancyBase = function (element) {
+    // save a reference to the native element
+    this.el = element;
+};
+
+// function definitions
+FancyBase.prototype = {
+    init: function () {
+        // kicks everything off
+    },
+    fancify: function () {
+        // creates and saves a reference to the fancy element
+    },
+    isChecked: function () {
+        // determines whether the element is checked
+        // this doesn't really apply to selects
+        // (the base class is tailored specifically for checkboxes)
+    },
+    isDisabled: function () {
+        // determines whether the element is disabled
+    },
+    focus: function () {
+        // puts the fancy element in the focused state
+    },
+    blur: function () {
+        // takes the fancy element out of the focused state
+    },
+    syncChange: function () {
+        // updates the fancy element
+        // whenever a change in the native element occurs
+    },
+    changeValue: function () {
+        // updates the native element
+        // whenever a change in the fancy element occurs
+    },
+    bindEvents: function () {
+        // convenience function that calls nativeEvents and fancyEvents
+    },
+    nativeEvents: function () {
+        // binds event handlers to the native element
+    },
+    fancyEvents: function () {
+        // binds event handlers to the fancy element
+    }
+};
+</code></pre>
+                <p>I know the code block above is fairly long, but hopefully it's not too daunting. It basically just consists of a variable definition and that variable's prototype definition. Let's break it down!</p>
+                <h4>Constructor</h4>
+<pre><code>var FancyBase = function (element) {
+    // save a reference to the native element
+    this.el = element;
+};</code></pre>
+                <p>This creates a new function and stores it in a variable, FancyBase. The convention of starting the variable name with a capital letter instead of a lowercase one signifies that we'll be creating an object from it later using the <strong>new</strong> keyword. Inside the function, you can declare and initialize local variables, similar to a constructor in object oriented languages. Be sure to precede your variable declarations with <strong>this.</strong>&mdash;that's how you'll retain a reference to them for later access.</p>
+                <h4>Function Definitions</h4>
+<pre><code>FancyBase.prototype = {
+    init: function () {
+        this.fancify();
+        this.el.addClass("hidden").after(this.fel);
+        this.bindEvents();
+    },
+    ...
+};</code></pre>
+                <p>Here, I'm defining FancyBase's prototype with an object literal containing function definitions. Because these functions are defined on the prototype property, they exist only one time in memory and are shared by all FancyBase objects that get created. Due to the prototype chain, other objects inheriting from FancyBase will receive these function definitions as well.</p>
+                <p>Some JavaScript design patterns, such as the Revealing Module or Revealing Prototype patterns, allow the creation of public and private variables and functions. In contrast, the Prototype pattern supports only public members, but this is actually necessary given the plugin architecture, because public access is required to override function behavior in derived objects. This is the mechanism by which Fancier Forms allows you, the plugin user, to extend/override/customize its functionality however you see fit.</p>
+                <h4>A Note About <em>this</em></h4>
+                <p>In the Prototype pattern, the <strong>this</strong> keyword always represents the instantiated object&mdash;in this case, FancyBase. Any variable references or function calls must be preceded with <strong>this.</strong> to work. If you look at the source code, you'll notice in some cases I am capturing <strong>this</strong> in a local variable called <strong>_this</strong>.</p>
+<pre><code>var _this = this;</code></pre>
+                <p>Occasionally, this practice is necessary to make the instantiated object available inside closures, such as event handlers. More often than not, however, I am employing that technique to allow JavaScript minifiers/obfuscators to be more effective; most minification gains come from swapping out local variable names with shorter ones.</p>
+                <h4>Instantiation</h4>
+                <p>In the model I stated earlier, FancyBase would actually be an abstract base class&mdash;meaning you can't actually create objects from its definition. Instead, you would create derived classes and instantiate those. That is the intent for this plugin, but there's nothing in JavaScript to stop us from creating instances of FancyBase, so I'll use it for the example.</p>
+<pre><code>var base = new FancyBase();</code></pre>
+                <p>Now we can call any of the variables and functions we defined on the <strong>this</strong> keyword.</p>
+<pre><code>base.init();</code></pre>
+                <h3>Inheritance</h3>
+                <p>Fancier Forms uses FancyBase to defined the majority of the functionality required by the plugin. But obviously, checkboxes, radios, and selects all differ from each other in various ways, so it also creates a construct to represent each of those (FancyCheckbox, FancyRadio, and FancySelect) that inherit functionality from FancyBase. The Prototype pattern allows the specification of alternate versions of the functions inherited from FancyBase where the functionality differs for those derived objects.</p>
             </section>
         </div>
 
