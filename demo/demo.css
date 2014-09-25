@@ -194,7 +194,7 @@ input[type="radio"] + label {
 	width: 18px;
 }
 
-.radio.selected:after {
+.radio.checked:after {
 	background: #666;
 	border-radius: 50%;
 	content: "";
@@ -207,7 +207,7 @@ input[type="radio"] + label {
 	width: 10px;
 }
 
-.radio.disabled.selected:after {
+.radio.disabled.checked:after {
 	background: #999;
 }
 
@@ -253,7 +253,7 @@ input[type="checkbox"] + label {
 	width: 18px;
 }
 
-.checkbox.selected:after {
+.checkbox.checked:after {
 	content: "\e800";
 	display: block;
 	font-family: fontello;
